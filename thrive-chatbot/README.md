@@ -1,79 +1,65 @@
-# Thrive London — AI Chatbot Service
+# Thrive London AI Chatbot
 
-A production-ready, embeddable AI chatbot for Thrive London, built with FastAPI and the Anthropic API. A single JavaScript snippet embeds a fully branded chat widget on any website.
+A production-ready AI chatbot service for Thrive London, built with FastAPI and the Anthropic API. Embeddable on any website via a single `<script>` tag.
 
 ---
 
-## Local Setup
-
-### 1. Clone and install
+## 1. Local Setup
 
 ```bash
+# Clone and enter the project
 git clone <your-repo-url>
 cd thrive-chatbot
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### 2. Configure environment
-
-```bash
+# Add your API key
 cp .env.example .env
-```
+# Edit .env and set ANTHROPIC_API_KEY=sk-ant-...
 
-Open `.env` and add your key:
-
-```
-ANTHROPIC_API_KEY=sk-ant-...
-```
-
-### 3. Run the server
-
-```bash
+# Run the server
 uvicorn main:app --reload
+# API is now live at http://localhost:8000
 ```
-
-The API is now running at `http://localhost:8000`.
 
 ---
 
-## Test the `/chat` endpoint
+## 2. Test the /chat Endpoint
 
 ```bash
 curl -X POST http://localhost:8000/chat \
   -H "Content-Type: application/json" \
   -d '{
-    "message": "What coffee machines do you offer for a team of 40?",
+    "message": "What coffee machines do you offer?",
     "client_id": "thrive",
     "conversation_history": []
   }'
 ```
 
-Expected response shape:
-
+Expected response:
 ```json
 {
-  "response": "For a team of 40...",
-  "conversation_history": [
-    { "role": "user", "content": "What coffee machines do you offer for a team of 40?" },
-    { "role": "assistant", "content": "For a team of 40..." }
-  ]
+  "response": "...",
+  "conversation_history": [...]
 }
 ```
 
 Health check:
-
 ```bash
 curl http://localhost:8000/health
-# {"status":"ok"}
+# {"status": "ok"}
 ```
 
 ---
 
-## Embed the Widget
+## 3. Embed the Widget
 
-Add one line before the closing `</body>` tag on any webpage:
+Add this single line before `</body>` on any page:
 
 ```html
 <script
@@ -83,114 +69,89 @@ Add one line before the closing `</body>` tag on any webpage:
 ></script>
 ```
 
-### Optional attributes
-
+**Optional attributes:**
 | Attribute | Default | Description |
 |---|---|---|
-| `data-client` | `thrive` | Client ID — must match a file in `clients/` |
+| `data-client` | `thrive` | Client ID (must match a file in `clients/`) |
 | `data-api` | *(required)* | Base URL of your deployed API |
-| `data-color` | `#FF5C35` | Override the brand colour |
-| `data-name` | `Thrive London` | Override the header business name |
-| `data-welcome` | *(built-in message)* | Override the welcome message |
+| `data-color` | `#FF5C35` | Primary brand colour |
+| `data-name` | `Thrive London` | Business name shown in the header |
 
-### Serving `widget.js`
-
-The widget file can be served as a static file by FastAPI. Add this to `main.py` if you want to serve it from the same origin:
-
+To serve `widget.js` from your FastAPI app, add this to `main.py`:
 ```python
 from fastapi.staticfiles import StaticFiles
 app.mount("/", StaticFiles(directory=".", html=False), name="static")
 ```
-
-Or deploy `widget.js` to a CDN (e.g. Cloudflare R2, AWS S3) and reference it there.
-
----
-
-## Deploy to Railway
-
-Railway is the simplest zero-config deployment option for FastAPI.
-
-### Step 1 — Create a Railway account
-
-Go to [railway.app](https://railway.app) and sign up with GitHub.
-
-### Step 2 — New project from GitHub
-
-1. Click **New Project → Deploy from GitHub repo**
-2. Select this repository
-3. Railway auto-detects Python and will use `uvicorn main:app --host 0.0.0.0 --port $PORT`
-
-### Step 3 — Add the environment variable
-
-In your Railway project dashboard:
-
-1. Click your service → **Variables**
-2. Add `ANTHROPIC_API_KEY` = your Anthropic API key
-
-### Step 4 — Deploy
-
-Railway deploys automatically on every push to `main`. Your API will be live at a URL like `https://thrive-chatbot-production.up.railway.app`.
-
-### Step 5 — Update the widget embed
-
-Replace `https://your-api-url.com` in the embed snippet with your Railway URL.
-
-### Optional: Add a `Procfile`
-
-If Railway doesn't detect the start command automatically, add a `Procfile` to the repo root:
-
-```
-web: uvicorn main:app --host 0.0.0.0 --port $PORT
-```
+Or serve it from a CDN/S3 bucket.
 
 ---
 
-## Add a New Client
+## 4. Deploy to Railway
 
-1. Copy the template:
+1. **Push your code to GitHub** (make sure `.env` is in `.gitignore` — it is).
 
-```bash
-cp clients/thrive.json clients/acme.json
-```
+2. **Go to [railway.app](https://railway.app)** and click **New Project → Deploy from GitHub repo**.
 
-2. Edit `clients/acme.json` — update `client_id`, `business_name`, `primary_color`, and `system_prompt` to match the new client.
+3. **Select your repository.** Railway auto-detects Python.
+
+4. **Set environment variables** in the Railway dashboard:
+   - `ANTHROPIC_API_KEY` → your Anthropic API key
+
+5. **Set the start command** in Railway settings (or add a `Procfile`):
+   ```
+   web: uvicorn main:app --host 0.0.0.0 --port $PORT
+   ```
+   Or create a `Procfile` in the project root:
+   ```
+   web: uvicorn main:app --host 0.0.0.0 --port $PORT
+   ```
+
+6. **Deploy.** Railway will install dependencies from `requirements.txt` and start the server.
+
+7. **Copy your Railway URL** (e.g. `https://thrive-chatbot.up.railway.app`) and use it as `data-api` in the widget embed tag.
+
+---
+
+## 5. Adding a New Client
+
+1. Copy the Thrive config:
+   ```bash
+   cp clients/thrive.json clients/acme.json
+   ```
+
+2. Edit `clients/acme.json` — update these fields:
+   ```json
+   {
+     "client_id": "acme",
+     "business_name": "Acme Corp",
+     "primary_color": "#0057FF",
+     "system_prompt": "You are an assistant for Acme Corp..."
+   }
+   ```
 
 3. Embed the widget with `data-client="acme"`:
+   ```html
+   <script
+     src="https://your-api-url.com/widget.js"
+     data-client="acme"
+     data-api="https://your-api-url.com"
+     data-color="#0057FF"
+     data-name="Acme Corp"
+   ></script>
+   ```
 
-```html
-<script
-  src="https://your-api-url.com/widget.js"
-  data-client="acme"
-  data-api="https://your-api-url.com"
-  data-color="#0055FF"
-  data-name="Acme Corp"
-></script>
-```
-
-No code changes or redeployment needed — the API loads client configs at runtime.
+No backend code changes needed — the API reads client configs dynamically.
 
 ---
 
 ## Rate Limiting
 
-The `/chat` endpoint allows **20 requests per IP per hour**. Exceeding this returns a `429 Too Many Requests` response. Adjust the limit in `main.py`:
+The `/chat` endpoint is limited to **20 requests per IP per hour**. Exceeded requests return HTTP 429.
 
-```python
-@limiter.limit("20/hour")   # change as needed
-```
+## Error Responses
 
----
+All errors return clean JSON — never raw stack traces:
 
-## Project Structure
-
-```
-thrive-chatbot/
-├── main.py              # FastAPI application
-├── requirements.txt     # Python dependencies
-├── .env.example         # Environment variable template
-├── .gitignore
-├── clients/
-│   └── thrive.json      # Thrive London client config & system prompt
-├── widget.js            # Self-contained embeddable chat widget
-└── README.md
+```json
+{ "error": "Client 'unknown' not found" }
 ```

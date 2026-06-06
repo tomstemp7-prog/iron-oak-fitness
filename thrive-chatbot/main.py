@@ -1,6 +1,7 @@
 import json
 import os
 from pathlib import Path
+from typing import Any
 
 import anthropic
 from dotenv import load_dotenv
@@ -14,91 +15,109 @@ from slowapi.util import get_remote_address
 
 load_dotenv()
 
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+if not ANTHROPIC_API_KEY:
+    raise RuntimeError("ANTHROPIC_API_KEY environment variable is not set")
+
+MODEL = "claude-haiku-4-5-20251001"
 CLIENTS_DIR = Path(__file__).parent / "clients"
 
 limiter = Limiter(key_func=get_remote_address)
+
 app = FastAPI(title="Thrive Chatbot API")
+
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+anthropic_client = anthropic.AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+
+
+class Message(BaseModel):
+    role: str
+    content: str
 
 
 class ChatRequest(BaseModel):
     message: str
     client_id: str
-    conversation_history: list = []
+    conversation_history: list[Message] = []
 
 
 class ChatResponse(BaseModel):
     response: str
-    conversation_history: list
+    conversation_history: list[Message]
 
 
-def load_client_config(client_id: str) -> dict:
-    config_path = CLIENTS_DIR / f"{client_id}.json"
-    if not config_path.exists():
+def load_client_config(client_id: str) -> dict[str, Any]:
+    client_file = CLIENTS_DIR / f"{client_id}.json"
+    if not client_file.exists():
         raise HTTPException(
             status_code=404,
-            detail=f"Client '{client_id}' not found. Ensure clients/{client_id}.json exists.",
+            detail=f"Client '{client_id}' not found",
         )
-    with open(config_path) as f:
+    with open(client_file, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-@app.exception_handler(Exception)
-async def generic_exception_handler(request: Request, exc: Exception):
-    if isinstance(exc, HTTPException):
-        return JSONResponse(
-            status_code=exc.status_code,
-            content={"error": exc.detail},
-        )
-    return JSONResponse(
-        status_code=500,
-        content={"error": "An unexpected error occurred. Please try again."},
-    )
-
-
 @app.get("/health")
-async def health():
+async def health_check():
     return {"status": "ok"}
 
 
 @app.post("/chat", response_model=ChatResponse)
 @limiter.limit("20/hour")
 async def chat(request: Request, body: ChatRequest):
-    if not ANTHROPIC_API_KEY:
-        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY is not configured.")
+    client_config = load_client_config(body.client_id)
+    system_prompt = client_config["system_prompt"]
 
-    config = load_client_config(body.client_id)
-    system_prompt = config.get("system_prompt", "You are a helpful assistant.")
-
-    updated_history = list(body.conversation_history) + [
-        {"role": "user", "content": body.message}
+    messages = [
+        {"role": msg.role, "content": msg.content}
+        for msg in body.conversation_history
     ]
+    messages.append({"role": "user", "content": body.message})
 
-    try:
-        client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-        api_response = client.messages.create(
-            model="claude-haiku-4-5",
-            max_tokens=1024,
-            system=system_prompt,
-            messages=updated_history,
-        )
-    except anthropic.APIStatusError as e:
-        raise HTTPException(status_code=502, detail=f"Upstream API error: {e.message}")
-    except anthropic.APIConnectionError:
-        raise HTTPException(status_code=503, detail="Could not reach the AI service. Please try again.")
+    response = await anthropic_client.messages.create(
+        model=MODEL,
+        max_tokens=1024,
+        system=system_prompt,
+        messages=messages,
+    )
 
-    assistant_message = api_response.content[0].text
+    assistant_text = ""
+    for block in response.content:
+        if block.type == "text":
+            assistant_text = block.text
+            break
 
-    updated_history.append({"role": "assistant", "content": assistant_message})
+    updated_history = list(body.conversation_history)
+    updated_history.append(Message(role="user", content=body.message))
+    updated_history.append(Message(role="assistant", content=assistant_text))
 
-    return ChatResponse(response=assistant_message, conversation_history=updated_history)
+    return ChatResponse(
+        response=assistant_text,
+        conversation_history=updated_history,
+    )
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": exc.detail},
+    )
+
+
+@app.exception_handler(Exception)
+async def generic_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={"error": "An internal server error occurred"},
+    )
