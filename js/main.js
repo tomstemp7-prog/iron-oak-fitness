@@ -1,153 +1,240 @@
-/* ============================================
-   IRON & OAK FITNESS — main.js
-   ============================================ */
+/* =========================================
+   IRON & OAK — MAIN.JS
+   ========================================= */
 
-(function () {
-  'use strict';
+document.addEventListener('DOMContentLoaded', function () {
 
-  /* ---------- Nav scroll behaviour ---------- */
+  /* -----------------------------------------
+     NAV SCROLL BEHAVIOUR
+  ----------------------------------------- */
   const nav = document.querySelector('.nav');
   if (nav) {
-    const onScroll = () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
+    const handleScroll = () => {
+      if (window.scrollY > 60) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
   }
 
-  /* ---------- Mobile hamburger ---------- */
-  const hamburger  = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
+  /* -----------------------------------------
+     HAMBURGER / MOBILE MENU
+  ----------------------------------------- */
+  const hamburger = document.querySelector('.nav-hamburger');
+  const mobileMenu = document.querySelector('.nav-mobile-menu');
+  const mobileClose = document.querySelector('.nav-mobile-close');
 
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
-      const isOpen = hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
     });
+
+    const closeMenu = () => {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (mobileClose) mobileClose.addEventListener('click', closeMenu);
 
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMenu);
     });
 
-    document.addEventListener('click', (e) => {
-      if (nav && !nav.contains(e.target) && !mobileMenu.contains(e.target)) {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
     });
   }
 
-  /* ---------- Active nav link ---------- */
+  /* -----------------------------------------
+     INTERSECTION OBSERVER — FADE IN UP
+  ----------------------------------------- */
+  const fadeEls = document.querySelectorAll('.fade-in-up');
+  if (fadeEls.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    fadeEls.forEach(el => observer.observe(el));
+  }
+
+  /* -----------------------------------------
+     PRICING TOGGLE (monthly / annual)
+  ----------------------------------------- */
+  const billingToggle = document.getElementById('billingToggle');
+  const priceAmounts = document.querySelectorAll('.price-amount');
+  const toggleLabelMonthly = document.getElementById('toggleLabelMonthly');
+  const toggleLabelAnnual = document.getElementById('toggleLabelAnnual');
+
+  if (billingToggle) {
+    const updatePrices = () => {
+      const isAnnual = billingToggle.checked;
+      priceAmounts.forEach(span => {
+        const monthly = span.dataset.monthly;
+        const annual = span.dataset.annual;
+        if (monthly !== undefined && annual !== undefined) {
+          span.textContent = isAnnual ? annual : monthly;
+        }
+      });
+
+      document.querySelectorAll('.price-period').forEach(el => {
+        el.textContent = isAnnual ? '/mo (billed annually)' : '/month';
+      });
+
+      if (toggleLabelMonthly && toggleLabelAnnual) {
+        if (isAnnual) {
+          toggleLabelMonthly.classList.remove('active');
+          toggleLabelAnnual.classList.add('active');
+        } else {
+          toggleLabelMonthly.classList.add('active');
+          toggleLabelAnnual.classList.remove('active');
+        }
+      }
+    };
+
+    billingToggle.addEventListener('change', updatePrices);
+    updatePrices();
+  }
+
+  /* -----------------------------------------
+     FAQ ACCORDION
+  ----------------------------------------- */
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    if (!question) return;
+
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+
+      const parentList = item.closest('.faq-list');
+      if (parentList) {
+        parentList.querySelectorAll('.faq-item.open').forEach(openItem => {
+          if (openItem !== item) openItem.classList.remove('open');
+        });
+      }
+
+      item.classList.toggle('open', !isOpen);
+    });
+  });
+
+  /* -----------------------------------------
+     ACTIVE NAV LINK
+  ----------------------------------------- */
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+  document.querySelectorAll('.nav-links a, .nav-mobile-menu a').forEach(link => {
+    const linkPath = link.getAttribute('href') || '';
+    const linkFile = linkPath.split('/').pop();
+    if (
+      linkFile === currentPath ||
+      (currentPath === '' && linkFile === 'index.html') ||
+      (currentPath === 'index.html' && linkFile === 'index.html')
+    ) {
       link.classList.add('active');
     }
   });
 
-  /* ---------- Pricing toggle ---------- */
-  const pricingToggle = document.getElementById('pricingToggle');
-  if (pricingToggle) {
-    const monthly = {
-      basic:   { price: '25',    sub: '',                         saving: '' },
-      plus:    { price: '40',    sub: '',                         saving: '' },
-      premium: { price: '55',    sub: '',                         saving: '' },
-    };
-    const annual = {
-      basic:   { price: '20.83', sub: '£250/yr billed annually',  saving: 'Save £50/year' },
-      plus:    { price: '33.33', sub: '£400/yr billed annually',  saving: 'Save £80/year' },
-      premium: { price: '45.83', sub: '£550/yr billed annually',  saving: 'Save £110/year' },
-    };
+  /* -----------------------------------------
+     TIMETABLE FILTER (classes page)
+  ----------------------------------------- */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const timetableCells = document.querySelectorAll('.timetable-cell');
 
-    const labelMonthly = document.getElementById('labelMonthly');
-    const labelAnnual  = document.getElementById('labelAnnual');
+  if (filterBtns.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.filter;
 
-    const applyPricing = (isAnnual) => {
-      const data = isAnnual ? annual : monthly;
-      ['basic', 'plus', 'premium'].forEach(plan => {
-        const amountEl = document.querySelector(`[data-plan="${plan}"] .amount`);
-        const subEl    = document.querySelector(`[data-plan="${plan}"] .plan-annual-info`);
-        const saveEl   = document.querySelector(`[data-plan="${plan}"] .savings-badge`);
-        if (amountEl) amountEl.textContent = data[plan].price;
-        if (subEl)    subEl.textContent    = data[plan].sub;
-        if (saveEl)   saveEl.textContent   = data[plan].saving;
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        timetableCells.forEach(cell => {
+          if (category === 'All' || cell.dataset.category === category) {
+            cell.classList.remove('hidden');
+          } else {
+            cell.classList.add('hidden');
+          }
+        });
       });
-      if (labelMonthly) labelMonthly.classList.toggle('active', !isAnnual);
-      if (labelAnnual)  labelAnnual.classList.toggle('active', isAnnual);
-    };
-
-    pricingToggle.addEventListener('change', () => applyPricing(pricingToggle.checked));
-    applyPricing(false);
-  }
-
-  /* ---------- FAQ accordion ---------- */
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const btn    = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    if (!btn || !answer) return;
-
-    btn.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(openItem => {
-        openItem.classList.remove('open');
-        openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  /* ---------- Contact form ---------- */
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const submitBtn = contactForm.querySelector('[type="submit"]');
-      const success   = document.getElementById('formSuccess');
-
-      submitBtn.textContent = 'Sending…';
-      submitBtn.disabled    = true;
-
-      setTimeout(() => {
-        contactForm.reset();
-        submitBtn.textContent = 'Message Sent!';
-        if (success) {
-          success.classList.add('show');
-          success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-        setTimeout(() => {
-          submitBtn.textContent = 'Send Message';
-          submitBtn.disabled    = false;
-          if (success) success.classList.remove('show');
-        }, 5000);
-      }, 900);
     });
   }
 
-  /* ---------- Smooth scroll for anchor links ---------- */
+  /* -----------------------------------------
+     SMOOTH SCROLL — ANCHOR LINKS
+  ----------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        const navH = parseInt(getComputedStyle(document.documentElement)
-          .getPropertyValue('--nav-h')) || 70;
-        const top = target.getBoundingClientRect().top + window.scrollY - navH;
+        const offset = 90;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });
 
-})();
+  /* -----------------------------------------
+     COUNTER ANIMATION
+  ----------------------------------------- */
+  const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+  if (statNumbers.length > 0) {
+    const countObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    statNumbers.forEach(el => countObserver.observe(el));
+  }
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+
+    const update = (time) => {
+      const elapsed = time - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  /* -----------------------------------------
+     CONTACT FORM — SUCCESS STATE
+  ----------------------------------------- */
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  if (contactForm && formSuccess) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      contactForm.style.display = 'none';
+      formSuccess.classList.add('visible');
+      window.scrollTo({ top: formSuccess.offsetTop - 120, behavior: 'smooth' });
+    });
+  }
+
+});
