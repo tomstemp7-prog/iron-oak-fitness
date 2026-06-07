@@ -1,173 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us | Iron &amp; Oak Fitness Reading</title>
-  <meta name="description" content="Get in touch with Iron &amp; Oak Fitness in Reading. Visit us, call us, or drop us an email.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Iron &amp; Oak Health Club, Reading</title>
+  <meta name="description" content="Get in touch with Iron &amp; Oak Health Club in Reading. Book a tour, ask about membership, or speak with our team." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<nav class="nav" role="navigation" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">IRON &amp; <span>OAK</span></a>
-    <ul class="nav-links" role="list">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="memberships.html">Memberships</a></li>
-      <li><a href="classes.html">Classes</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a href="contact.html" class="btn btn-primary btn-sm nav-cta">Contact</a></li>
-    </ul>
-    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-<nav class="mobile-menu" aria-label="Mobile navigation">
-  <a href="index.html">Home</a>
-  <a href="memberships.html">Memberships</a>
-  <a href="classes.html">Classes</a>
-  <a href="about.html">About</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Iron &amp; Oak</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="memberships.html">Membership</a>
+        <a href="classes.html">Classes</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
+      <div class="nav-cta"><a href="memberships.html" class="btn-primary">Join Now</a></div>
+      <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
 
-<section class="page-hero">
-  <div class="container page-hero-content">
-    <span class="section-label">Get in touch</span>
-    <h1>CONTACT US</h1>
-    <p>We’re here to help. Fill in the form, give us a call, or come and see us in person.</p>
+  <div class="nav-mobile-menu">
+    <span class="nav-mobile-close" aria-label="Close menu">&times;</span>
+    <a href="index.html">Home</a>
+    <a href="memberships.html">Membership</a>
+    <a href="classes.html">Classes</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="memberships.html" class="btn-gold" style="margin-top:16px;padding:14px 36px;border-radius:4px;">Join Now</a>
   </div>
-</section>
 
-<section class="section section--dark">
-  <div class="container">
-    <div class="contact-layout">
-      <div>
-        <div class="contact-form">
-          <h3>Send Us a Message</h3>
-          <form id="contactForm" novalidate>
+  <section class="page-hero" style="background-image: url('https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1920&q=80');">
+    <div class="page-hero-content">
+      <span class="section-label">We'd Love to Hear from You</span>
+      <h1>Get in Touch</h1>
+      <p>Whether you'd like a tour, have a question about membership, or just want to say hello — our team is ready.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+
+        <div class="contact-form-wrap fade-in-up">
+          <h2>Send Us an Enquiry</h2>
+          <p style="margin-bottom:2rem;">Fill in the form below and a member of our team will get back to you within one working day.</p>
+
+          <form class="contact-form" id="contactForm" novalidate>
             <div class="form-row">
               <div class="form-group">
-                <label for="contactName">Your Name</label>
-                <input type="text" id="contactName" name="name" placeholder="Jane Smith" required>
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
               </div>
               <div class="form-group">
-                <label for="contactEmail">Email Address</label>
-                <input type="email" id="contactEmail" name="email" placeholder="jane@example.com" required>
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="07700 900000" />
               </div>
             </div>
             <div class="form-group">
-              <label for="contactSubject">Subject</label>
-              <select id="contactSubject" name="subject" required>
-                <option value="" disabled selected>Select a subject…</option>
-                <option value="general">General Enquiry</option>
-                <option value="membership">Membership</option>
-                <option value="classes">Classes</option>
-                <option value="pt">Personal Training</option>
-                <option value="other">Other</option>
+              <label for="interest">Membership Interest</label>
+              <select id="interest" name="interest">
+                <option value="">Select an option…</option>
+                <option value="essential">Essential – £35/month</option>
+                <option value="club">Club – £55/month</option>
+                <option value="premium">Premium – £75/month</option>
+                <option value="tour">Book a tour first</option>
+                <option value="corporate">Corporate / team membership</option>
+                <option value="exploring">Just exploring for now</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="contactMessage">Message</label>
-              <textarea id="contactMessage" name="message" placeholder="Tell us how we can help…" required></textarea>
+              <label for="message">Your Message <span class="required">*</span></label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help." required></textarea>
             </div>
-            <div class="form-submit-wrap">
-              <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
-            </div>
-            <div class="form-success" id="formSuccess">
-              Message sent! We’ll get back to you within 24 hours.
-            </div>
+            <button type="submit" class="btn-primary contact-submit">Send Enquiry</button>
           </form>
+
+          <div class="form-success" id="formSuccess" style="display:none;">
+            <div class="form-success-icon">✓</div>
+            <h3>Thank you — we'll be in touch.</h3>
+            <p>Your enquiry has been received. A member of our team will respond within one working day. In the meantime, feel free to <a href="faq.html">browse our FAQ</a> or <a href="memberships.html">explore our membership plans</a>.</p>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="contact-details">
+
+        <div class="contact-info fade-in-up stagger-1">
           <div class="contact-card">
-            <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><div class="contact-card-label">Address</div><div class="contact-card-value">12 Caversham Road<br>Reading, RG1 8AX<br>United Kingdom</div></div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .9h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
-            <div><div class="contact-card-label">Phone</div><div class="contact-card-value"><a href="tel:01184962200">0118 496 2200</a></div></div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="contact-card-label">Email</div><div class="contact-card-value"><a href="mailto:hello@ironoakfitness.co.uk">hello@ironoakfitness.co.uk</a></div></div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
             <div>
-              <div class="contact-card-label">Opening Hours</div>
-              <div class="contact-card-value">24/7 member access<br><span style="color:var(--muted);font-size:0.85rem;">Staffed: Mon–Fri 06:00–21:00</span><br><span style="color:var(--muted);font-size:0.85rem;">Staffed: Sat–Sun 07:00–18:00</span></div>
+              <h4>Address</h4>
+              <p>12 Caversham Road<br>Reading, RG1 8AX<br>Berkshire, United Kingdom</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 9.81a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 0h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 6.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 13.92z"/></svg>
+            </div>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:01184962200">0118 496 2200</a></p>
+              <p style="font-size:0.85rem;margin-top:0.25rem;">Mon–Fri 08:00–20:00<br>Sat–Sun 09:00–17:00</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:hello@ironoak.co.uk">hello@ironoak.co.uk</a></p>
+              <p><a href="mailto:corporate@ironoak.co.uk">corporate@ironoak.co.uk</a></p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h4>Opening Hours</h4>
+              <table class="hours-table">
+                <tr><td>Monday – Friday</td><td>06:00 – 22:00</td></tr>
+                <tr><td>Saturday</td><td>07:00 – 20:00</td></tr>
+                <tr><td>Sunday</td><td>07:00 – 20:00</td></tr>
+                <tr><td>Bank Holidays</td><td>08:00 – 18:00</td></tr>
+              </table>
             </div>
           </div>
         </div>
-        <div class="map-placeholder">
-          <div class="map-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <h4>Find Us</h4>
-          <p>12 Caversham Road, Reading, RG1 8AX</p>
-          <a href="https://maps.google.com/?q=12+Caversham+Road+Reading+RG1+8AX" target="_blank" rel="noopener">View on Google Maps &#8594;</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">IRON &amp; <span>OAK</span></div>
-        <p class="footer-tagline">Forge your best self.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-          <a href="#" class="social-link" aria-label="X / Twitter"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M4 4l16 16M4 20L20 4"/></svg></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="memberships.html">Memberships</a></li>
-          <li><a href="classes.html">Classes</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Get In Touch</h4>
-        <div class="footer-contact">
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>12 Caversham Road, Reading, RG1 8AX</span>
-          </div>
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .9h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <span><a href="tel:01184962200">0118 496 2200</a></span>
-          </div>
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span><a href="mailto:hello@ironoakfitness.co.uk">hello@ironoakfitness.co.uk</a></span>
-          </div>
-        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Iron &amp; Oak Fitness Ltd. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-      </div>
-    </div>
-  </div>
-</footer>
+  </section>
 
-<script src="js/main.js"></script>
+  <section class="map-section">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.87!2d-0.9698!3d51.4551!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876543210abcdef%3A0x0!2sReading%2C+RG1+8AX!5e0!3m2!1sen!2suk!4v1700000000000" width="100%" height="480" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Iron &amp; Oak Health Club location map"></iframe>
+  </section>
+
+  <section class="section section--off-white">
+    <div class="container" style="text-align:center;max-width:680px;">
+      <span class="section-label fade-in-up">No Obligation</span>
+      <h2 class="fade-in-up">Book a Complimentary Tour</h2>
+      <p class="fade-in-up stagger-1">See every space in person, meet the team, and get honest answers to all your questions — no hard sell, no pressure. Tours run daily during staffed hours and take around 45 minutes.</p>
+      <div class="fade-in-up stagger-2" style="margin-top:2.5rem;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="tel:01184962200" class="btn-primary">Call to Book</a>
+        <a href="memberships.html" class="btn-outline">View Membership Plans</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Iron &amp; Oak</a>
+          <p class="footer-tagline">Forge your best self.</p>
+          <p>Reading's most distinguished health club — where exceptional facilities meet a community that challenges you to be better, every single day.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="memberships.html">Membership &amp; Pricing</a></li>
+            <li><a href="classes.html">Classes &amp; Timetable</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>12 Caversham Road<br>Reading, RG1 8AX</p>
+          <p style="margin-top:0.75rem;"><a href="tel:01184962200">0118 496 2200</a></p>
+          <p><a href="mailto:hello@ironoak.co.uk">hello@ironoak.co.uk</a></p>
+          <h4 style="margin-top:1.5rem;">Opening Hours</h4>
+          <div class="footer-hours">
+            <div class="footer-hours-row"><span>Mon – Fri</span><span>06:00 – 22:00</span></div>
+            <div class="footer-hours-row"><span>Saturday</span><span>07:00 – 20:00</span></div>
+            <div class="footer-hours-row"><span>Sunday</span><span>07:00 – 20:00</span></div>
+            <div class="footer-hours-row"><span>Bank Holidays</span><span>08:00 – 18:00</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Iron &amp; Oak Health Club Ltd. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
