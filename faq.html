@@ -1,231 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ | Iron &amp; Oak Fitness Reading</title>
-  <meta name="description" content="Got questions about Iron &amp; Oak Fitness? Find answers about memberships, facilities, classes, and more.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ | Iron &amp; Oak Health Club, Reading</title>
+  <meta name="description" content="Answers to your questions about Iron &amp; Oak membership, facilities, classes, payments, and getting started." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .faq-layout { max-width: 800px; margin: 0 auto; }
+    .faq-category { margin-bottom: 48px; }
+    .faq-category-title { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--navy); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--gold); display: inline-block; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-of-type { border-top: 1px solid var(--border); }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; cursor: pointer; width: 100%; background: none; border: none; text-align: left; gap: 16px; }
+    .faq-question:hover { color: var(--navy); }
+    .faq-question-text { display:none; } /* use direct text */
+    .faq-icon { font-size: 1.4rem; color: var(--gold); flex-shrink: 0; transition: transform 0.3s ease; font-weight: 300; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-question span:first-child { font-size: 0.9375rem; font-weight: 500; color: var(--charcoal); line-height: 1.4; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-item.open .faq-answer { max-height: 600px; }
+    .faq-answer-inner { padding: 0 0 20px; font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+    .faq-cta { text-align: center; background: var(--off-white); border-radius: var(--radius); padding: 48px 32px; margin-top: 64px; border: 1px solid var(--border); }
+    .faq-cta h3 { font-size: 1.75rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .faq-cta p { margin-bottom: 0; }
+    .hours-table td { padding: 3px 12px 3px 0; font-size: 0.875rem; color: var(--charcoal); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 16px; }
+    .map-section { line-height: 0; }
+    .contact-submit { width: 100%; padding: 16px; margin-top: 8px; }
+    .required { color: #e55; }
+    @media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
 
-<nav class="nav" role="navigation" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">IRON &amp; <span>OAK</span></a>
-    <ul class="nav-links" role="list">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="memberships.html">Memberships</a></li>
-      <li><a href="classes.html">Classes</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a href="contact.html" class="btn btn-primary btn-sm nav-cta">Contact</a></li>
-    </ul>
-    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-<nav class="mobile-menu" aria-label="Mobile navigation">
-  <a href="index.html">Home</a>
-  <a href="memberships.html">Memberships</a>
-  <a href="classes.html">Classes</a>
-  <a href="about.html">About</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
-<section class="page-hero">
-  <div class="container page-hero-content">
-    <span class="section-label">Help</span>
-    <h1>FREQUENTLY ASKED QUESTIONS</h1>
-    <p>Can’t find your answer? Drop us an email at <a href="mailto:hello@ironoakfitness.co.uk" style="color:var(--accent);">hello@ironoakfitness.co.uk</a></p>
-  </div>
-</section>
-
-<section class="section section--dark">
-  <div class="container">
-    <div class="faq-section">
-
-      <div class="faq-category">
-        <h3 class="faq-category-title">Memberships &amp; Contracts</h3>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can I cancel my membership anytime?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes. Monthly members can cancel with 30 days’ notice at any time. Annual members can cancel, but the remaining balance is non-refundable unless cancellation is for medical reasons with appropriate documentation.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Is there a joining fee?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">No joining fee, ever. Your first payment is simply your first month’s or year’s membership — nothing more.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can I freeze my membership?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes. You can freeze your membership for between 1 and 3 months per calendar year for medical or travel reasons. Submit a freeze request via the member app or email us at hello@ironoakfitness.co.uk.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can I upgrade or downgrade my plan?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes. You can switch between plans at any time. Changes take effect at the start of your next billing cycle. Speak to a member of staff or manage this through the member app.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Is there a minimum term?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Monthly plans have no minimum term — just 30 days’ cancellation notice. Annual plans run for 12 months and are paid upfront.</div></div>
-        </div>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Iron &amp; Oak</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="memberships.html">Membership</a>
+        <a href="classes.html">Classes</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="faq.html" class="active">FAQ</a>
+        <a href="contact.html">Contact</a>
       </div>
-
-      <div class="faq-category">
-        <h3 class="faq-category-title">Facilities</h3>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Is there parking?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes — we have 30 free on-site parking spaces available 24/7. No permit required.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Are there lockers?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes. Day-use lockers are available at no cost — just bring your own padlock. If you’d like a permanent locker, these can be rented from £5/month. Speak to reception to arrange this.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Are towels provided?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Towels are not included in membership but you can hire one for £1 per session, or purchase a branded Iron &amp; Oak towel from our reception desk.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Is there a pool?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Not currently — we’re a dry gym. Our focus is strength, conditioning, and group classes. We may consider aquatic facilities in the future as we grow.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Is there a sauna?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes! Our sauna is open daily from 06:00 to 22:00 and is free for all members. It seats up to 6 people.</div></div>
-        </div>
-      </div>
-
-      <div class="faq-category">
-        <h3 class="faq-category-title">Classes</h3>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Do I need to book classes in advance?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Booking is strongly recommended via the member app as classes fill up quickly. Plus members can book 7 days ahead; Premium members enjoy 10-day advance booking priority.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">What if I miss a booked class?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Please cancel at least 2 hours before the class start time via the app so your spot can be released to others. Repeated no-shows (3 or more in a month) may result in a temporary booking restriction.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Are classes included in the Basic plan?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">No. Basic members can attend any class as a drop-in for £5 per session. Classes are unlimited and fully included in Plus and Premium memberships.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">How many classes run per week?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">We run 20+ classes per week across all disciplines — HIIT, Spin, Yoga Flow, Boxing Fit, Strength Foundations, and Pilates Core. View the full timetable on our Classes page.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can beginners join any class?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Absolutely. All of our classes are coached and can be scaled to your fitness level. Just let the instructor know before the session that you’re new and they’ll look after you.</div></div>
-        </div>
-      </div>
-
-      <div class="faq-category">
-        <h3 class="faq-category-title">Getting Started</h3>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Do I need an induction?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">We offer a free 30-minute gym induction for all new members — highly recommended but not mandatory. It covers safe use of equipment, our facilities, and how to get the most out of your membership.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">What should I bring for my first visit?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Trainers, comfortable workout clothes, a water bottle, and a padlock for your locker. Everything else you need — kit, supplements, and smoothies — is available on-site.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can I bring a guest?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Plus members get 2 guest passes per month; Premium members get 4. Basic members can bring guests at £10 per visit. All guests must be accompanied by their member host at all times.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Is there a free trial?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes! Try the gym completely free for 3 days — no card required, no obligation. Just pop in to reception with some ID and we’ll get you sorted.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">What are the opening hours?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">The gym is open 24/7 for all members with keycard access. Staffed hours are Mon–Fri 06:00–21:00, and Sat–Sun 07:00–18:00.</div></div>
-        </div>
-      </div>
-
-      <div class="faq-category">
-        <h3 class="faq-category-title">Payment</h3>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">When am I billed?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Monthly memberships are billed on the same date each month as your join date. Annual memberships are billed in full upfront.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can I pay annually?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes — annual membership saves you the equivalent of 2 months’ fees. You can pay upfront by card or bank transfer. See our Memberships page for annual pricing.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">What payment methods do you accept?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">We accept Visa, Mastercard, American Express, and direct debit for memberships. Cash is accepted for in-gym purchases (smoothies, merchandise, towel hire) but not for memberships.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can I get a refund?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Monthly fees are non-refundable once charged. If you’re unable to use the gym, we’d recommend freezing your membership instead. Speak to reception for help.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Do you offer student or NHS discounts?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes — we offer 15% off any membership plan with a valid student ID or NHS badge. Just show your ID at reception when signing up. The discount applies to all plan tiers.</div></div>
-        </div>
-      </div>
-
+      <div class="nav-cta"><a href="memberships.html" class="btn-primary">Join Now</a></div>
+      <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
-    <div style="text-align:center;margin-top:60px;">
-      <p style="margin-bottom:20px;">Still have questions?</p>
-      <a href="contact.html" class="btn btn-primary">Get In Touch</a>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">IRON &amp; <span>OAK</span></div>
-        <p class="footer-tagline">Forge your best self.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-          <a href="#" class="social-link" aria-label="X / Twitter"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M4 4l16 16M4 20L20 4"/></svg></a>
+  <div class="nav-mobile-menu">
+    <span class="nav-mobile-close" aria-label="Close menu">&times;</span>
+    <a href="index.html">Home</a>
+    <a href="memberships.html">Membership</a>
+    <a href="classes.html">Classes</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="memberships.html" class="btn-gold" style="margin-top:16px;padding:14px 36px;border-radius:4px;">Join Now</a>
+  </div>
+
+  <section class="page-hero" style="background-image: url('https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1920&q=80');">
+    <div class="page-hero-content">
+      <span class="section-label">Help Centre</span>
+      <h1>Frequently Asked Questions</h1>
+      <p>Everything you need to know about Iron &amp; Oak. Can't find your answer? <a href="contact.html" style="color:var(--gold-light);text-decoration:underline;">Get in touch</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="faq-layout">
+
+        <div class="faq-category fade-in-up">
+          <h3 class="faq-category-title">Membership &amp; Contracts</h3>
+          <div class="faq-item"><button class="faq-question"><span>Can I cancel my membership at any time?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes. Monthly memberships can be cancelled with 30 days' written notice via the member app, by email to hello@ironoak.co.uk, or in person at reception. Your membership remains fully accessible during the notice period. No cancellation fees on monthly plans.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Is there a joining fee or long-term contract?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>No joining fee on any membership tier. Monthly plans are contract-free with no minimum term beyond the first month. Annual plans are voluntary and offer the equivalent of two months free. Our philosophy: people stay because they love the club, not because they feel trapped.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Can I freeze my membership?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes — all members can freeze for up to three consecutive months per calendar year for medical reasons, extended travel, or personal circumstances. Billing pauses and your end date extends accordingly. Request via the app or email hello@ironoak.co.uk with at least seven days' notice before your next billing date.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Can I upgrade or downgrade my plan?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Upgrades take effect immediately with prorated billing. Downgrades take effect at the start of your next billing cycle. All changes via the app, by phone on 0118 496 2200, or in person. No fees for changing plans.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Do you offer corporate or family memberships?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes. Corporate memberships for businesses of 3+ employees — contact corporate@ironoak.co.uk for a tailored proposal. Family memberships include joint adult plans and junior add-ons (under 16) with access to supervised sessions and family swim times.</p></div></div></div>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="memberships.html">Memberships</a></li>
-          <li><a href="classes.html">Classes</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Get In Touch</h4>
-        <div class="footer-contact">
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>12 Caversham Road, Reading, RG1 8AX</span>
+
+        <div class="faq-category fade-in-up">
+          <h3 class="faq-category-title">Facilities</h3>
+          <div class="faq-item"><button class="faq-question"><span>What are your opening hours?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Monday to Friday: 06:00 – 22:00. Saturday and Sunday: 07:00 – 20:00. Bank Holidays: 08:00 – 18:00. Last entry to the spa is 30 minutes before closing time.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Is there parking at the club?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes — 80 dedicated spaces, all free for members during visits. Accessible 24 hours via your member keycard. Secure cycle storage, a bike repair station, and 6 EV charging points also available.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Do you provide towels and lockers?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Club and Premium members receive complimentary towel service. Essential members can hire towels for £1 or bring their own. Day-use lockers available throughout changing rooms on a first-come basis, requiring a £1 coin deposit (returned on exit). Changing rooms include hairdryers and complimentary toiletries.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Is the spa included in all memberships?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Spa access (sauna, steam room, ice bath, relaxation lounge) is included with Club and Premium memberships. Essential members can access as a day pass add-on for £12 per visit. During peak times a timed booking system operates, bookable 24 hours ahead via the app.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Is there a café or food offering at the club?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes — the Iron &amp; Oak Member Café serves hot and cold drinks, protein shakes, smoothies, and light food. Menu designed with our nutrition team to support training goals. Members may also bring their own food. Premium members receive complimentary coffee in the Business Lounge.</p></div></div></div>
+        </div>
+
+        <div class="faq-category fade-in-up">
+          <h3 class="faq-category-title">Classes</h3>
+          <div class="faq-item"><button class="faq-question"><span>Are classes included in my membership?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Unlimited group fitness classes are included with Club and Premium memberships. Essential members pay £8 per class. Club members can book 7 days ahead; Premium members get a 10-day priority booking window.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>How do I book a class?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Primarily through the Iron &amp; Oak member app (iOS and Android) — browse the timetable, filter by class or instructor, and book in seconds. Also bookable at reception. Popular sessions fill 48 hours ahead. A 2-hour cancellation policy applies; three late cancellations in 30 days results in a 7-day booking suspension.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Are the classes suitable for beginners?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes — almost all classes are designed for a range of abilities. Instructors offer modifications and progressions within the same session. Arrive five minutes early if it's your first time so the instructor can set you up correctly. Our Foundations classes are specifically designed for newcomers.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>What is your cancellation policy for classes?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Please cancel at least two hours before the session so waitlisted members can take your place. Three late cancellations or no-shows in a 30-day period results in a seven-day booking suspension, after which privileges are automatically restored.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Can I do personal training at Iron &amp; Oak?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes. Eight qualified PTs on site, ranging from strength specialists to sports rehabilitation coaches. Essential members pay standard rate; Club members get 10% off; Premium members include one monthly PT session and receive 20% off additional sessions.</p></div></div></div>
+        </div>
+
+        <div class="faq-category fade-in-up">
+          <h3 class="faq-category-title">Getting Started</h3>
+          <div class="faq-item"><button class="faq-question"><span>Can I visit the club before joining?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Absolutely — complimentary tours run seven days a week during staffed hours, covering all facilities. Around 45 minutes, no obligation to join. Book via the Contact page, call 0118 496 2200, or simply walk in. We also offer a free guest day pass.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Do I need to complete an induction before using the gym?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Not compulsory but strongly recommended, especially for those newer to training. The free 45-minute induction covers equipment safety, the app, facility tour, and a brief coach consultation about your goals. Bookable when you join or at any time.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>What should I bring for my first visit?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Training clothing and clean indoor-soled trainers (outdoor footwear not permitted on the gym floor). A water bottle is recommended, though stations are available throughout the club. Pool users need swimwear and a swimming cap (mandatory for hygiene). You'll collect your access fob from reception on your first visit.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Can I bring a guest?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Club members receive 2 complimentary guest passes per month; Premium members receive 4. Passes provide full club access for the day. The hosting member must be present throughout. Essential members can bring guests at £20 per visit. All guests must sign a health declaration and be at least 16.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Is Iron &amp; Oak suitable for members recovering from injury?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes — we support members across a wide range of recovery journeys. Our team includes sports rehabilitation and corrective exercise specialists. The hydrotherapy pool is frequently used as part of recovery protocols. We recommend bringing a GP or physio letter for your induction if you have a recent injury.</p></div></div></div>
+        </div>
+
+        <div class="faq-category fade-in-up">
+          <h3 class="faq-category-title">Payments</h3>
+          <div class="faq-item"><button class="faq-question"><span>What payment methods do you accept?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Monthly memberships are collected by Direct Debit. One-off payments (annual memberships, PT sessions, day passes, in-club purchases) accept Visa, Mastercard, American Express, or contactless. Payment details managed securely through the member app.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>When is my monthly payment taken?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>On the same calendar date each month as your original join date. If that falls on a weekend or bank holiday, it's collected on the next working day. A reminder email is sent three days before payment is due.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>What happens if my payment fails?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>We notify you by email and retry after five working days. Access continues as normal during this period. If the second attempt fails, access is temporarily suspended until the balance is settled. Contact us as soon as possible if you anticipate a difficulty — we always aim to resolve these situations with a conversation, not a penalty.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Do you offer student or NHS discounts?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Yes — 15% discount for full-time students (valid student ID or TOTUM card) and NHS employees (valid staff ID). Verified annually. Equivalent discounts for emergency services and armed forces personnel. Corporate rates available for 3+ employees — contact corporate@ironoak.co.uk.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question"><span>Can I get a refund on my membership?</span><span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p>Monthly payments are non-refundable once collected, as full access is provided throughout the billing period. Annual memberships are refundable within 14 days of joining if genuinely unsatisfied; a medical cancellation policy applies thereafter. Contact us immediately if you believe a payment was taken in error.</p></div></div></div>
+        </div>
+
+        <div class="faq-cta fade-in-up">
+          <h3>Still have a question?</h3>
+          <p>Our membership team is available in person, by phone, or by email six days a week.</p>
+          <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+            <a href="contact.html" class="btn-primary">Get in Touch</a>
+            <a href="tel:01184962200" class="btn-outline">Call 0118 496 2200</a>
           </div>
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .9h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <span><a href="tel:01184962200">0118 496 2200</a></span>
-          </div>
-          <div class="footer-contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span><a href="mailto:hello@ironoakfitness.co.uk">hello@ironoakfitness.co.uk</a></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Iron &amp; Oak</a>
+          <p class="footer-tagline">Forge your best self.</p>
+          <p>Reading's most distinguished health club — where exceptional facilities meet a community that challenges you to be better, every single day.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="memberships.html">Membership &amp; Pricing</a></li>
+            <li><a href="classes.html">Classes &amp; Timetable</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>12 Caversham Road<br>Reading, RG1 8AX</p>
+          <p style="margin-top:0.75rem;"><a href="tel:01184962200">0118 496 2200</a></p>
+          <p><a href="mailto:hello@ironoak.co.uk">hello@ironoak.co.uk</a></p>
+          <h4 style="margin-top:1.5rem;">Opening Hours</h4>
+          <div class="footer-hours">
+            <div class="footer-hours-row"><span>Mon – Fri</span><span>06:00 – 22:00</span></div>
+            <div class="footer-hours-row"><span>Saturday</span><span>07:00 – 20:00</span></div>
+            <div class="footer-hours-row"><span>Sunday</span><span>07:00 – 20:00</span></div>
+            <div class="footer-hours-row"><span>Bank Holidays</span><span>08:00 – 18:00</span></div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Iron &amp; Oak Fitness Ltd. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Iron &amp; Oak Health Club Ltd. All rights reserved.</p>
+        <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Cookie Policy</a></div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
 </body>
 </html>
